@@ -1,0 +1,3606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow by Grace | Brow & Lash Artist</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <style>
+        /* ================================================================
+           GLOW BY GRACE - MOBILE-FIRST RESPONSIVE CSS FRAMEWORK
+           ================================================================
+           
+           TABLE OF CONTENTS
+           -----------------
+           1.  CSS Custom Properties
+           2.  Universal, HTML & Body Rules
+           3.  Typography System
+           4.  Typography Utility Classes
+           5.  Layout Utilities
+           6.  Button Components
+           7.  Header & Navigation
+           8.  Scroll To Top Button
+           9.  Hero Section
+           10. Animations
+           11. Responsive Breakpoints
+           12. Accessibility
+           
+           BREAKPOINT SYSTEM (Mobile-First: min-width)
+           -------------------------------------------
+           Base        : 0 - 575px      (Default mobile styles)
+           sm          : ≥576px         (Large phones, landscape)
+           md          : ≥768px         (Tablets)
+           lg          : ≥992px         (Small desktops, laptops)
+           xl          : ≥1200px        (Large desktops)
+           xxl         : ≥1400px        (Extra large screens)
+           
+           ================================================================ */
+
+        /* ================================
+           1. CSS CUSTOM PROPERTIES
+           ================================ */
+        :root {
+            /* ----- COLORS ----- */
+            /* Primary Palette - Mocha Mousse Dominant */
+            --clr-mocha: #A47764;
+            --clr-mocha-light: #B8897A;
+            --clr-mocha-dark: #8a6354;
+            --clr-espresso: #3D2C29;
+            --clr-cream: #FAF7F2;
+            --clr-ivory: #FDF9F6;
+            --clr-terracotta: #C4907A;
+            --clr-taupe: #D5C8C1;
+            
+            /* Semantic Colors */
+            --clr-text-light: var(--clr-cream);
+            --clr-text-dark: var(--clr-espresso);
+            --clr-bg-dark: var(--clr-mocha);
+            --clr-bg-light: var(--clr-ivory);
+            --clr-accent: var(--clr-terracotta);
+            
+            /* ----- TYPOGRAPHY ----- */
+            /* Font Families */
+            --ff-display: 'Cormorant Garamond', Georgia, serif;
+            --ff-body: 'DM Sans', system-ui, sans-serif;
+            
+            /* 
+               Fluid Font Sizes using clamp()
+               Formula: clamp(min, preferred, max)
+               Preferred uses: base + (viewport-based scaling)
+            */
+            --fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);       /* 12px → 14px */
+            --fs-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);          /* 14px → 16px */
+            --fs-base: clamp(1rem, 0.925rem + 0.4vw, 1.125rem);       /* 16px → 18px */
+            --fs-md: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);         /* 18px → 22px */
+            --fs-lg: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);        /* 20px → 28px */
+            --fs-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);        /* 24px → 36px */
+            --fs-2xl: clamp(2rem, 1.5rem + 2.5vw, 3rem);              /* 32px → 48px */
+            --fs-3xl: clamp(2.5rem, 1.75rem + 3.75vw, 4rem);          /* 40px → 64px */
+            --fs-4xl: clamp(3rem, 2rem + 4.5vw, 5rem);                /* 48px → 80px */
+            --fs-5xl: clamp(3.5rem, 2.25rem + 5.5vw, 6rem);           /* 56px → 96px */
+            --fs-hero: clamp(3rem, 2rem + 5vw, 6rem);                 /* 48px → 96px */
+            
+            /* Line Heights */
+            --lh-tight: 1.1;
+            --lh-snug: 1.3;
+            --lh-normal: 1.6;
+            --lh-relaxed: 1.8;
+            
+            /* Letter Spacing */
+            --ls-tight: -0.02em;
+            --ls-normal: 0;
+            --ls-wide: 0.1em;
+            --ls-wider: 0.15em;
+            --ls-widest: 0.2em;
+            
+            /* ----- SPACING ----- */
+            /* 
+               Fluid Spacing Scale
+               Scales proportionally with viewport
+            */
+            --space-3xs: clamp(0.25rem, 0.2rem + 0.25vw, 0.375rem);   /* 4px → 6px */
+            --space-2xs: clamp(0.375rem, 0.3rem + 0.35vw, 0.5rem);    /* 6px → 8px */
+            --space-xs: clamp(0.5rem, 0.4rem + 0.5vw, 0.75rem);       /* 8px → 12px */
+            --space-sm: clamp(0.75rem, 0.6rem + 0.75vw, 1.25rem);     /* 12px → 20px */
+            --space-md: clamp(1rem, 0.75rem + 1.25vw, 1.75rem);       /* 16px → 28px */
+            --space-lg: clamp(1.5rem, 1rem + 2.5vw, 3rem);            /* 24px → 48px */
+            --space-xl: clamp(2rem, 1.25rem + 3.75vw, 4.5rem);        /* 32px → 72px */
+            --space-2xl: clamp(3rem, 2rem + 5vw, 6rem);               /* 48px → 96px */
+            --space-3xl: clamp(4rem, 2.5rem + 7.5vw, 8rem);           /* 64px → 128px */
+            
+            /* Section Spacing */
+            --section-padding-y: var(--space-2xl);
+            --section-padding-x: var(--space-md);
+            
+            /* ----- LAYOUT ----- */
+            /* Container Widths */
+            --container-xs: 36rem;      /* 576px */
+            --container-sm: 48rem;      /* 768px */
+            --container-md: 62rem;      /* 992px */
+            --container-lg: 75rem;      /* 1200px */
+            --container-xl: 87.5rem;    /* 1400px */
+            --container-max: 90rem;     /* 1440px - max content width */
+            
+            /* Content Widths */
+            --content-narrow: 45ch;
+            --content-base: 65ch;
+            --content-wide: 85ch;
+            
+            /* ----- EFFECTS ----- */
+            /* Border Radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
+            --radius-xl: 1.5rem;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(61, 44, 41, 0.08);
+            --shadow-md: 0 4px 12px rgba(61, 44, 41, 0.1);
+            --shadow-lg: 0 8px 24px rgba(61, 44, 41, 0.12);
+            --shadow-xl: 0 16px 48px rgba(61, 44, 41, 0.15);
+            
+            /* Transitions */
+            --ease-out: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --ease-in-out: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+            --transition-fast: 150ms var(--ease-out);
+            --transition-base: 300ms var(--ease-out);
+            --transition-slow: 500ms var(--ease-out);
+            
+            /* ----- Z-INDEX SCALE ----- */
+            --z-behind: -1;
+            --z-base: 0;
+            --z-above: 1;
+            --z-dropdown: 100;
+            --z-sticky: 200;
+            --z-overlay: 300;
+            --z-modal: 400;
+            --z-toast: 500;
+        }
+
+        /* ================================
+           2. UNIVERSAL, HTML & BODY RULES
+           ================================ */
+        
+        /* ----- UNIVERSAL RESET ----- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            /* Prevent font size inflation on mobile */
+            -webkit-text-size-adjust: 100%;
+        }
+
+        /* Remove default styling for elements */
+        * {
+            /* Remove default margins */
+            margin: 0;
+            /* Allow percentage-based heights */
+            min-height: 0;
+            min-width: 0;
+        }
+
+        /* ----- HTML ELEMENT ----- */
+        html {
+            /* Base font size for rem calculations (16px default) */
+            font-size: 100%;
+            
+            /* Smooth scrolling for anchor links */
+            scroll-behavior: smooth;
+            
+            /* Better scroll padding for fixed headers (adjust as needed) */
+            scroll-padding-top: var(--space-xl);
+            
+            /* Smooth scrolling */
+            scroll-behavior: smooth;
+            
+            /* Prevent horizontal overflow */
+            overflow-x: hidden;
+            
+            /* Improve text rendering */
+            -webkit-text-size-adjust: 100%;
+            -moz-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            
+            /* Better tab sizing */
+            tab-size: 4;
+            -moz-tab-size: 4;
+            
+            /* Hanging punctuation for better typography */
+            hanging-punctuation: first last;
+        }
+
+        /* ----- BODY ELEMENT ----- */
+        body {
+            /* Typography */
+            font-family: var(--ff-body);
+            font-size: var(--fs-base);
+            font-weight: 400;
+            line-height: var(--lh-normal);
+            
+            /* Colors */
+            color: var(--clr-text-dark);
+            background-color: var(--clr-bg-light);
+            
+            /* Text Rendering */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+            font-feature-settings: "kern" 1, "liga" 1;
+            
+            /* Prevent horizontal scroll */
+            overflow-x: hidden;
+            
+            /* Allow full height layouts */
+            min-height: 100vh;
+            min-height: 100dvh; /* Dynamic viewport for mobile */
+            
+            /* Ensure body fills viewport */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main content area grows to fill space */
+        main {
+            flex-grow: 1;
+        }
+
+        /* ================================
+           3. TYPOGRAPHY SYSTEM
+           ================================ */
+        
+        /* ----- HEADINGS ----- */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--ff-display);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: inherit;
+            text-wrap: balance;
+            
+            /* Spacing - headings get margin-top for rhythm */
+            margin-block: 0;
+        }
+
+        /* Individual heading sizes */
+        h1 {
+            font-size: var(--fs-3xl);
+            line-height: var(--lh-tight);
+            letter-spacing: var(--ls-tight);
+        }
+
+        h2 {
+            font-size: var(--fs-2xl);
+            line-height: var(--lh-tight);
+        }
+
+        h3 {
+            font-size: var(--fs-xl);
+            line-height: var(--lh-snug);
+        }
+
+        h4 {
+            font-size: var(--fs-lg);
+            line-height: var(--lh-snug);
+        }
+
+        h5 {
+            font-size: var(--fs-md);
+            line-height: var(--lh-snug);
+            font-weight: 500;
+        }
+
+        h6 {
+            font-size: var(--fs-base);
+            line-height: var(--lh-normal);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-wide);
+        }
+
+        /* ----- PARAGRAPHS & BODY TEXT ----- */
+        p {
+            text-wrap: pretty;
+            margin-block: 0;
+        }
+
+        /* Paragraph spacing in flow content */
+        p + p {
+            margin-top: var(--space-md);
+        }
+
+        /* Lead paragraph - larger intro text */
+        .lead {
+            font-size: var(--fs-md);
+            line-height: var(--lh-relaxed);
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        /* Small text */
+        small,
+        .small {
+            font-size: var(--fs-sm);
+            line-height: var(--lh-normal);
+        }
+
+        /* Extra small / caption text */
+        .caption {
+            font-size: var(--fs-xs);
+            line-height: var(--lh-normal);
+            opacity: 0.8;
+        }
+
+        /* ----- INLINE TEXT ELEMENTS ----- */
+        strong,
+        b {
+            font-weight: 600;
+        }
+
+        em,
+        i:not([class]) {
+            font-style: italic;
+        }
+
+        /* Highlighted/marked text */
+        mark {
+            background-color: var(--clr-terracotta);
+            color: var(--clr-cream);
+            padding-inline: 0.2em;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Abbreviations */
+        abbr[title] {
+            text-decoration: underline dotted;
+            cursor: help;
+            text-decoration-skip-ink: none;
+        }
+
+        /* Subscript & Superscript */
+        sub,
+        sup {
+            font-size: 75%;
+            line-height: 0;
+            position: relative;
+            vertical-align: baseline;
+        }
+
+        sub {
+            bottom: -0.25em;
+        }
+
+        sup {
+            top: -0.5em;
+        }
+
+        /* ----- LINKS ----- */
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color var(--transition-fast), opacity var(--transition-fast);
+        }
+
+        /* Text links (in body content) */
+        .text-link,
+        article a:not([class]),
+        .prose a:not([class]) {
+            color: var(--clr-mocha);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.2em;
+            transition: 
+                color var(--transition-fast),
+                text-decoration-color var(--transition-fast);
+        }
+
+        .text-link:hover,
+        article a:not([class]):hover,
+        .prose a:not([class]):hover {
+            color: var(--clr-mocha-dark);
+            text-decoration-color: var(--clr-terracotta);
+        }
+
+        /* Links on dark backgrounds */
+        .dark a:not([class]),
+        .bg-dark a:not([class]) {
+            color: var(--clr-cream);
+        }
+
+        .dark a:not([class]):hover,
+        .bg-dark a:not([class]):hover {
+            color: var(--clr-taupe);
+        }
+
+        /* ----- LISTS ----- */
+        ul,
+        ol {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Styled lists (for content areas) */
+        .list-styled,
+        article ul:not([class]),
+        article ol:not([class]),
+        .prose ul:not([class]),
+        .prose ol:not([class]) {
+            padding-left: var(--space-md);
+            margin-block: var(--space-sm);
+        }
+
+        .list-styled li,
+        article ul:not([class]) li,
+        article ol:not([class]) li,
+        .prose ul:not([class]) li,
+        .prose ol:not([class]) li {
+            position: relative;
+            padding-left: var(--space-sm);
+            margin-bottom: var(--space-xs);
+        }
+
+        /* Unordered list bullets */
+        .list-styled li::before,
+        article ul:not([class]) li::before,
+        .prose ul:not([class]) li::before {
+            content: '';
+            position: absolute;
+            left: calc(var(--space-md) * -1);
+            top: 0.7em;
+            width: 5px;
+            height: 5px;
+            background-color: var(--clr-terracotta);
+            border-radius: var(--radius-full);
+        }
+
+        /* Ordered list numbers */
+        article ol:not([class]),
+        .prose ol:not([class]) {
+            counter-reset: list-counter;
+        }
+
+        article ol:not([class]) li,
+        .prose ol:not([class]) li {
+            counter-increment: list-counter;
+        }
+
+        article ol:not([class]) li::before,
+        .prose ol:not([class]) li::before {
+            content: counter(list-counter) ".";
+            position: absolute;
+            left: calc(var(--space-md) * -1);
+            top: 0;
+            font-weight: 500;
+            color: var(--clr-terracotta);
+        }
+
+        /* ----- BLOCKQUOTES ----- */
+        blockquote {
+            font-family: var(--ff-display);
+            font-size: var(--fs-lg);
+            font-style: italic;
+            line-height: var(--lh-relaxed);
+            color: var(--clr-espresso);
+            padding-left: var(--space-lg);
+            margin-block: var(--space-lg);
+            border-left: 3px solid var(--clr-terracotta);
+        }
+
+        blockquote cite {
+            display: block;
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-style: normal;
+            font-weight: 500;
+            margin-top: var(--space-sm);
+            color: var(--clr-mocha);
+        }
+
+        blockquote cite::before {
+            content: '— ';
+        }
+
+        /* ----- CODE & PREFORMATTED ----- */
+        code,
+        kbd,
+        samp,
+        pre {
+            font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+
+        /* Inline code */
+        code:not(pre code) {
+            background-color: var(--clr-taupe);
+            color: var(--clr-espresso);
+            padding: 0.15em 0.4em;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Code blocks */
+        pre {
+            background-color: var(--clr-espresso);
+            color: var(--clr-cream);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+            margin-block: var(--space-md);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: inherit;
+        }
+
+        /* Keyboard input */
+        kbd {
+            background-color: var(--clr-ivory);
+            border: 1px solid var(--clr-taupe);
+            border-radius: var(--radius-sm);
+            padding: 0.15em 0.4em;
+            box-shadow: 0 2px 0 var(--clr-taupe);
+        }
+
+        /* ----- HORIZONTAL RULE ----- */
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(
+                to right,
+                transparent,
+                var(--clr-taupe),
+                transparent
+            );
+            margin-block: var(--space-xl);
+        }
+
+        /* Decorative divider variant */
+        hr.divider-fancy {
+            height: auto;
+            background: none;
+            text-align: center;
+        }
+
+        hr.divider-fancy::before {
+            content: '✦';
+            color: var(--clr-terracotta);
+            font-size: var(--fs-sm);
+        }
+
+        /* ----- ADDRESS ----- */
+        address {
+            font-style: normal;
+            line-height: var(--lh-relaxed);
+        }
+
+        /* ----- MEDIA ELEMENTS ----- */
+        img,
+        picture,
+        video,
+        canvas,
+        svg {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Responsive images inside figures */
+        figure {
+            margin: 0;
+        }
+
+        figcaption {
+            font-size: var(--fs-sm);
+            color: var(--clr-mocha);
+            margin-top: var(--space-xs);
+            text-align: center;
+        }
+
+        /* ----- FORM ELEMENTS BASE ----- */
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+            color: inherit;
+        }
+
+        /* Remove default button styles */
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Textarea specific */
+        textarea {
+            resize: vertical;
+        }
+
+        /* Remove number input spinners */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        /* ----- TABLES BASE ----- */
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+        }
+
+        /* ----- INTERACTIVE STATES ----- */
+        :focus-visible {
+            outline: 2px solid var(--clr-accent);
+            outline-offset: 3px;
+        }
+
+        /* Hide focus ring for mouse users */
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Selection highlight */
+        ::selection {
+            background-color: var(--clr-mocha);
+            color: var(--clr-cream);
+        }
+
+        /* Disabled state */
+        [disabled],
+        .disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+
+        /* ================================
+           4. TYPOGRAPHY UTILITY CLASSES
+           ================================ */
+        
+        /* ----- FONT FAMILIES ----- */
+        .font-display {
+            font-family: var(--ff-display);
+        }
+
+        .font-body {
+            font-family: var(--ff-body);
+        }
+
+        /* ----- FONT SIZES ----- */
+        .text-hero {
+            font-size: var(--fs-hero);
+            line-height: var(--lh-tight);
+        }
+
+        .text-3xl {
+            font-size: var(--fs-3xl);
+            line-height: var(--lh-tight);
+        }
+
+        .text-2xl {
+            font-size: var(--fs-2xl);
+            line-height: var(--lh-tight);
+        }
+
+        .text-xl {
+            font-size: var(--fs-xl);
+            line-height: var(--lh-snug);
+        }
+
+        .text-lg {
+            font-size: var(--fs-lg);
+            line-height: var(--lh-snug);
+        }
+
+        .text-md {
+            font-size: var(--fs-md);
+            line-height: var(--lh-normal);
+        }
+
+        .text-base {
+            font-size: var(--fs-base);
+            line-height: var(--lh-normal);
+        }
+
+        .text-sm {
+            font-size: var(--fs-sm);
+            line-height: var(--lh-normal);
+        }
+
+        .text-xs {
+            font-size: var(--fs-xs);
+            line-height: var(--lh-normal);
+        }
+
+        /* ----- FONT WEIGHTS ----- */
+        .font-normal {
+            font-weight: 400;
+        }
+
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        /* ----- LINE HEIGHTS ----- */
+        .leading-tight {
+            line-height: var(--lh-tight);
+        }
+
+        .leading-snug {
+            line-height: var(--lh-snug);
+        }
+
+        .leading-normal {
+            line-height: var(--lh-normal);
+        }
+
+        .leading-relaxed {
+            line-height: var(--lh-relaxed);
+        }
+
+        /* ----- LETTER SPACING ----- */
+        .tracking-tight {
+            letter-spacing: var(--ls-tight);
+        }
+
+        .tracking-normal {
+            letter-spacing: var(--ls-normal);
+        }
+
+        .tracking-wide {
+            letter-spacing: var(--ls-wide);
+        }
+
+        .tracking-wider {
+            letter-spacing: var(--ls-wider);
+        }
+
+        .tracking-widest {
+            letter-spacing: var(--ls-widest);
+        }
+
+        /* ----- TEXT TRANSFORMS ----- */
+        .uppercase {
+            text-transform: uppercase;
+            letter-spacing: var(--ls-wider);
+        }
+
+        .lowercase {
+            text-transform: lowercase;
+        }
+
+        .capitalize {
+            text-transform: capitalize;
+        }
+
+        .normal-case {
+            text-transform: none;
+            letter-spacing: var(--ls-normal);
+        }
+
+        /* ----- TEXT STYLES ----- */
+        .italic {
+            font-style: italic;
+        }
+
+        .not-italic {
+            font-style: normal;
+        }
+
+        .underline {
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
+        .no-underline {
+            text-decoration: none;
+        }
+
+        /* ----- TEXT COLORS ----- */
+        .text-dark {
+            color: var(--clr-text-dark);
+        }
+
+        .text-light {
+            color: var(--clr-text-light);
+        }
+
+        .text-mocha {
+            color: var(--clr-mocha);
+        }
+
+        .text-terracotta {
+            color: var(--clr-terracotta);
+        }
+
+        .text-taupe {
+            color: var(--clr-taupe);
+        }
+
+        .text-muted {
+            opacity: 0.7;
+        }
+
+        /* ----- TEXT ALIGNMENT ----- */
+        .text-left {
+            text-align: left;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .text-justify {
+            text-align: justify;
+        }
+
+        /* ----- PROSE CONTAINER ----- */
+        /* For long-form content with proper spacing */
+        .prose {
+            max-width: var(--content-base);
+        }
+
+        .prose > * + * {
+            margin-top: var(--space-md);
+        }
+
+        .prose > h2 + *,
+        .prose > h3 + *,
+        .prose > h4 + * {
+            margin-top: var(--space-sm);
+        }
+
+        .prose h2,
+        .prose h3,
+        .prose h4 {
+            margin-top: var(--space-xl);
+        }
+
+        /* ================================
+           5. LAYOUT UTILITIES
+           ================================ */
+        
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin-inline: auto;
+            padding-inline: var(--space-md);
+        }
+
+        .container--narrow {
+            max-width: var(--container-sm);
+        }
+
+        .container--wide {
+            max-width: var(--container-xl);
+        }
+
+        /* Section */
+        .section {
+            padding-block: var(--section-padding-y);
+            padding-inline: var(--section-padding-x);
+        }
+
+        /* Flex Utilities */
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .flex-wrap {
+            flex-wrap: wrap;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .items-end {
+            align-items: flex-end;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .justify-around {
+            justify-content: space-around;
+        }
+
+        /* Gap Utilities */
+        .gap-xs { gap: var(--space-xs); }
+        .gap-sm { gap: var(--space-sm); }
+        .gap-md { gap: var(--space-md); }
+        .gap-lg { gap: var(--space-lg); }
+        .gap-xl { gap: var(--space-xl); }
+
+        /* Grid Utilities */
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+        /* Text Alignment */
+        .text-left { text-align: left; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+
+        /* Content Width Constraints */
+        .max-w-narrow { max-width: var(--content-narrow); }
+        .max-w-base { max-width: var(--content-base); }
+        .max-w-wide { max-width: var(--content-wide); }
+
+        /* Margin Auto */
+        .mx-auto { margin-inline: auto; }
+
+        /* ================================
+           6. BUTTON COMPONENTS
+           ================================ */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-wider);
+            text-decoration: none;
+            padding: var(--space-sm) var(--space-lg);
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: 
+                background-color var(--transition-fast),
+                color var(--transition-fast),
+                border-color var(--transition-fast),
+                transform var(--transition-fast),
+                box-shadow var(--transition-fast);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Primary Button - Cream on Mocha backgrounds */
+        .btn--primary {
+            color: var(--clr-mocha);
+            background-color: var(--clr-cream);
+            border-color: var(--clr-cream);
+        }
+
+        .btn--primary:hover,
+        .btn--primary:focus {
+            color: var(--clr-cream);
+            background-color: transparent;
+        }
+
+        /* Secondary Button - Outlined */
+        .btn--secondary {
+            color: var(--clr-cream);
+            background-color: transparent;
+            border-color: var(--clr-cream);
+        }
+
+        .btn--secondary:hover,
+        .btn--secondary:focus {
+            color: var(--clr-mocha);
+            background-color: var(--clr-cream);
+        }
+
+        /* Dark Button - For light backgrounds */
+        .btn--dark {
+            color: var(--clr-cream);
+            background-color: var(--clr-espresso);
+            border-color: var(--clr-espresso);
+        }
+
+        .btn--dark:hover,
+        .btn--dark:focus {
+            color: var(--clr-espresso);
+            background-color: transparent;
+        }
+
+        /* Button Sizes */
+        .btn--sm {
+            font-size: var(--fs-xs);
+            padding: var(--space-xs) var(--space-md);
+        }
+
+        .btn--lg {
+            font-size: var(--fs-base);
+            padding: var(--space-md) var(--space-xl);
+        }
+
+        /* Button with Icon */
+        .btn i {
+            font-size: 0.9em;
+        }
+
+        /* ================================
+           7. HEADER & NAVIGATION
+           ================================ */
+        
+        /* ----- HEADER ----- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: var(--z-sticky);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-sm) var(--space-md);
+            background-color: transparent;
+            transition: 
+                background-color var(--transition-base),
+                box-shadow var(--transition-base);
+        }
+
+        /* Scrolled state */
+        .header.is-scrolled {
+            background-color: var(--clr-mocha);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ----- LOGO ----- */
+        .logo {
+            position: relative;
+            z-index: calc(var(--z-overlay) + 10);
+            font-family: var(--ff-display);
+            font-size: var(--fs-xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-cream);
+            text-decoration: none;
+            transition: opacity var(--transition-fast);
+        }
+
+        .logo:hover,
+        .logo:focus {
+            opacity: 0.85;
+        }
+
+        .logo span {
+            font-style: italic;
+        }
+
+        /* ----- HEADER CTA (Desktop only) ----- */
+        .header__cta {
+            display: none;
+        }
+
+        /* ----- NAV TOGGLE BUTTON ----- */
+        .nav-toggle {
+            /* Reset button styles */
+            appearance: none;
+            -webkit-appearance: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            
+            /* Positioning */
+            position: relative;
+            z-index: calc(var(--z-overlay) + 10);
+            
+            /* Touch-friendly sizing (44x44 minimum) */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            
+            /* Icon styling */
+            color: var(--clr-cream);
+            font-size: 1.5rem;
+            
+            /* Transitions */
+            transition: 
+                color var(--transition-fast),
+                transform var(--transition-fast);
+        }
+
+        .nav-toggle:hover {
+            color: var(--clr-taupe);
+        }
+
+        .nav-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .nav-toggle:focus {
+            outline: none;
+        }
+
+        .nav-toggle:focus-visible {
+            outline: 2px solid var(--clr-cream);
+            outline-offset: 2px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Icon visibility toggle */
+        .nav-toggle .fa-xmark {
+            display: none;
+        }
+
+        .nav-toggle[aria-expanded="true"] .fa-bars {
+            display: none;
+        }
+
+        .nav-toggle[aria-expanded="true"] .fa-xmark {
+            display: block;
+        }
+
+        /* Screen reader only text */
+        .nav-toggle .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* ----- MOBILE NAVIGATION PANEL ----- */
+        .nav {
+            /* Fixed full-screen overlay */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: var(--z-overlay);
+            
+            /* Appearance */
+            background-color: var(--clr-espresso);
+            
+            /* Layout */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: var(--space-xl) var(--space-md);
+            
+            /* Hidden state */
+            opacity: 0;
+            visibility: hidden;
+            
+            /* Transition */
+            transition: 
+                opacity var(--transition-base),
+                visibility var(--transition-base);
+        }
+
+        /* Open state */
+        .nav.is-open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ----- NAV LIST ----- */
+        .nav__list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-lg);
+            text-align: center;
+        }
+
+        /* ----- NAV ITEMS ----- */
+        .nav__item {
+            /* Staggered animation setup */
+            opacity: 0;
+            transform: translateY(12px);
+            transition: 
+                opacity var(--transition-base),
+                transform var(--transition-base);
+        }
+
+        /* Animate items when nav is open */
+        .nav.is-open .nav__item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Stagger delays */
+        .nav.is-open .nav__item:nth-child(1) { transition-delay: 0.05s; }
+        .nav.is-open .nav__item:nth-child(2) { transition-delay: 0.1s; }
+        .nav.is-open .nav__item:nth-child(3) { transition-delay: 0.15s; }
+        .nav.is-open .nav__item:nth-child(4) { transition-delay: 0.2s; }
+        .nav.is-open .nav__item:nth-child(5) { transition-delay: 0.25s; }
+        .nav.is-open .nav__item:nth-child(6) { transition-delay: 0.3s; }
+        .nav.is-open .nav__item:nth-child(7) { transition-delay: 0.35s; }
+
+        /* Reset delays when closing */
+        .nav:not(.is-open) .nav__item {
+            transition-delay: 0s;
+        }
+
+        /* ----- NAV LINKS ----- */
+        .nav__link {
+            display: inline-block;
+            font-family: var(--ff-display);
+            font-size: var(--fs-lg);
+            font-weight: 400;
+            letter-spacing: var(--ls-wide);
+            color: var(--clr-cream);
+            text-decoration: none;
+            padding: var(--space-2xs) var(--space-sm);
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .nav__link::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 50%;
+            height: 1px;
+            background-color: var(--clr-terracotta);
+            transition: transform var(--transition-fast);
+        }
+
+        .nav__link:hover,
+        .nav__link:focus {
+            color: var(--clr-terracotta);
+        }
+
+        .nav__link:hover::after,
+        .nav__link:focus::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .nav__link:focus-visible {
+            outline: 2px solid var(--clr-terracotta);
+            outline-offset: 4px;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Active link state */
+        .nav__link.is-active {
+            color: var(--clr-terracotta);
+        }
+
+        .nav__link.is-active::after {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        /* ----- NAV CTA BUTTON ----- */
+        .nav__cta {
+            margin-top: var(--space-xs);
+        }
+
+        .nav__cta .btn {
+            font-size: var(--fs-xs);
+            line-height: var(--lh-tight);
+            padding: var(--space-xs) var(--space-lg);
+        }
+
+        /* ----- NAV SEPARATOR ----- */
+        .nav__separator {
+            width: 60px;
+            height: 1px;
+            background-color: rgba(250, 247, 242, 0.25);
+            margin: var(--space-lg) 0;
+            
+            /* Animation */
+            opacity: 0;
+            transform: scaleX(0);
+            transition: 
+                opacity var(--transition-base),
+                transform var(--transition-base);
+            transition-delay: 0s;
+        }
+
+        .nav.is-open .nav__separator {
+            opacity: 1;
+            transform: scaleX(1);
+            transition-delay: 0.35s;
+        }
+
+        /* ----- NAV FOOTER (Social Links) ----- */
+        .nav__footer {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            
+            /* Animation */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: 
+                opacity var(--transition-base),
+                transform var(--transition-base);
+            transition-delay: 0s;
+        }
+
+        .nav.is-open .nav__footer {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.4s;
+        }
+
+        .nav__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            color: var(--clr-cream);
+            border: 1px solid rgba(250, 247, 242, 0.2);
+            border-radius: var(--radius-full);
+            transition: 
+                color var(--transition-fast),
+                background-color var(--transition-fast),
+                border-color var(--transition-fast);
+        }
+
+        .nav__social-link:hover,
+        .nav__social-link:focus {
+            color: var(--clr-espresso);
+            background-color: var(--clr-cream);
+            border-color: var(--clr-cream);
+        }
+
+        .nav__social-link:focus-visible {
+            outline: 2px solid var(--clr-terracotta);
+            outline-offset: 2px;
+        }
+
+        /* ----- BODY LOCK ----- */
+        body.nav-open {
+            overflow: hidden;
+        }
+
+        /* ============================================
+           DESKTOP NAVIGATION (min-width: 768px)
+           ============================================ */
+        @media (min-width: 768px) {
+            
+            .header {
+                padding: var(--space-md) var(--space-lg);
+            }
+
+            /* Hide mobile toggle */
+            .nav-toggle {
+                display: none;
+            }
+
+            /* Reset nav - centered with absolute positioning */
+            .nav {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 1;
+                visibility: visible;
+                background-color: transparent;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: 0;
+            }
+
+            .nav__list {
+                flex-direction: row;
+                gap: var(--space-2xs);
+            }
+
+            .nav__item {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            /* Hide CTA in centered nav - we'll add separate desktop CTA */
+            .nav__cta {
+                display: none;
+            }
+
+            .nav__link {
+                font-family: var(--ff-body);
+                font-size: var(--fs-sm);
+                font-weight: 500;
+                letter-spacing: normal;
+                padding: var(--space-xs) var(--space-sm);
+                border-radius: var(--radius-sm);
+            }
+
+            .nav__link::after {
+                display: none;
+            }
+
+            .nav__link:hover,
+            .nav__link:focus {
+                color: var(--clr-cream);
+                background-color: rgba(250, 247, 242, 0.15);
+            }
+
+            .nav__link.is-active {
+                color: var(--clr-cream);
+                background-color: rgba(250, 247, 242, 0.1);
+            }
+
+            /* Desktop CTA - positioned right */
+            .header__cta {
+                display: block;
+                font-size: var(--fs-xs);
+                line-height: var(--lh-tight);
+                padding: var(--space-xs) var(--space-md);
+            }
+
+            /* Hide mobile elements */
+            .nav__separator,
+            .nav__footer {
+                display: none;
+            }
+        }
+
+        /* ============================================
+           LARGE DESKTOP (min-width: 992px)
+           ============================================ */
+        @media (min-width: 992px) {
+            
+            .header {
+                padding: var(--space-md) var(--space-xl);
+            }
+
+            .nav__list {
+                gap: var(--space-xs);
+            }
+
+            .nav__link {
+                font-size: var(--fs-base);
+                padding: var(--space-xs) var(--space-md);
+            }
+        }
+
+        /* ============================================
+           EXTRA LARGE DESKTOP (min-width: 1200px)
+           ============================================ */
+        @media (min-width: 1200px) {
+            
+            .nav__list {
+                gap: var(--space-sm);
+            }
+        }
+
+        /* ================================
+           8. SCROLL TO TOP BUTTON
+           ================================ */
+        .scroll-to-top {
+            /* Positioning */
+            position: fixed;
+            bottom: var(--space-lg);
+            right: var(--space-md);
+            z-index: var(--z-sticky);
+            
+            /* Sizing */
+            width: clamp(2.75rem, 2.5rem + 1vw, 3.25rem);
+            height: clamp(2.75rem, 2.5rem + 1vw, 3.25rem);
+            
+            /* Appearance - like .btn--primary with mocha border */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--clr-cream);
+            color: var(--clr-mocha);
+            border: 2px solid var(--clr-mocha);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+            cursor: pointer;
+            
+            /* Icon sizing */
+            font-size: var(--fs-base);
+            
+            /* Initially hidden */
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            
+            /* Transitions */
+            transition: 
+                opacity var(--transition-base),
+                visibility var(--transition-base),
+                transform var(--transition-base),
+                background-color var(--transition-fast),
+                color var(--transition-fast),
+                border-color var(--transition-fast),
+                box-shadow var(--transition-fast);
+        }
+
+        /* Visible state - toggled via JavaScript */
+        .scroll-to-top.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Hover & Focus states - like .btn--primary but filled */
+        .scroll-to-top:hover {
+            background-color: var(--clr-mocha);
+            color: var(--clr-cream);
+            border-color: var(--clr-mocha);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .scroll-to-top:focus-visible {
+            outline: 2px solid var(--clr-cream);
+            outline-offset: 3px;
+        }
+
+        /* Active/pressed state */
+        .scroll-to-top:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Variant: Light background version */
+        .scroll-to-top--light {
+            background-color: var(--clr-cream);
+            color: var(--clr-mocha);
+            border-color: var(--clr-taupe);
+        }
+
+        .scroll-to-top--light:hover {
+            background-color: var(--clr-mocha);
+            color: var(--clr-cream);
+            border-color: var(--clr-mocha);
+        }
+
+        /* Variant: Outlined/Ghost */
+        .scroll-to-top--outline {
+            background-color: transparent;
+            color: var(--clr-mocha);
+            border-color: var(--clr-mocha);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .scroll-to-top--outline:hover {
+            background-color: var(--clr-mocha);
+            color: var(--clr-cream);
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 768px) {
+            .scroll-to-top {
+                bottom: var(--space-xl);
+                right: var(--space-lg);
+            }
+        }
+
+        /* ================================
+           9. HERO SECTION
+           ================================ */
+        .hero {
+            min-height: 100svh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            color: var(--clr-text-light);
+        }
+
+        /* Background image with mocha overlay */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url("https://images.pexels.com/photos/3724431/pexels-photo-3724431.jpeg?auto=compress&cs=tinysrgb&w=1920");
+            background-size: cover;
+            background-position: center;
+            z-index: var(--z-behind);
+        }
+
+        /* Mocha color overlay - heavier left, lighter right */
+        .hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(164, 119, 100, 0.92) 0%,
+                rgba(164, 119, 100, 0.85) 40%,
+                rgba(164, 119, 100, 0.65) 70%,
+                rgba(164, 119, 100, 0.5) 100%
+            );
+            z-index: var(--z-behind);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: var(--z-above);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .hero__tagline {
+            font-size: var(--fs-xs);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: var(--ls-widest);
+            opacity: 0.85;
+            margin-bottom: var(--space-sm);
+            animation: fadeSlideUp 0.8s var(--ease-out) both;
+            animation-delay: 0.2s;
+        }
+
+        .hero__tagline i {
+            margin-right: var(--space-2xs);
+            font-size: 0.85em;
+        }
+
+        .hero__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-hero);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            margin-bottom: var(--space-md);
+            animation: fadeSlideUp 0.8s var(--ease-out) both;
+            animation-delay: 0.4s;
+        }
+
+        .hero__title span {
+            display: block;
+            font-style: italic;
+            font-size: 0.85em;
+        }
+
+        .hero__subtitle {
+            font-size: var(--fs-md);
+            line-height: var(--lh-relaxed);
+            opacity: 0.9;
+            max-width: var(--content-narrow);
+            margin-bottom: var(--space-xl);
+            animation: fadeSlideUp 0.8s var(--ease-out) both;
+            animation-delay: 0.6s;
+        }
+
+        .hero__cta {
+            animation: fadeSlideUp 0.8s var(--ease-out) both;
+            animation-delay: 0.8s;
+        }
+
+        /* Desktop: Left-aligned hero content */
+        @media (min-width: 768px) {
+            .hero {
+                align-items: flex-start;
+                text-align: left;
+                padding-left: 8%;
+            }
+
+            .hero__content {
+                max-width: 550px;
+            }
+
+            .hero__subtitle {
+                margin-inline: 0;
+            }
+        }
+
+        /* Scroll Indicator */
+        .hero__scroll {
+            position: absolute;
+            bottom: var(--space-lg);
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            opacity: 0.6;
+            animation: fadeIn 0.8s var(--ease-out) both;
+            animation-delay: 1.2s;
+        }
+
+        .hero__scroll-text {
+            font-size: var(--fs-xs);
+            text-transform: uppercase;
+            letter-spacing: var(--ls-wider);
+        }
+
+        .hero__scroll-icon {
+            font-size: var(--fs-sm);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+
+        /* ================================
+           10. ANIMATIONS
+           ================================ */
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 0.6; }
+        }
+
+        @keyframes scrollBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(6px);
+            }
+        }
+
+        /* ================================
+           11. RESPONSIVE BREAKPOINTS
+           Mobile-First (min-width)
+           ================================ */
+
+        /* ----- SM: ≥576px (Large phones) ----- */
+        @media (min-width: 576px) {
+            :root {
+                --section-padding-x: var(--space-lg);
+            }
+
+            .sm\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .sm\:text-left {
+                text-align: left;
+            }
+        }
+
+        /* ----- MD: ≥768px (Tablets) ----- */
+        @media (min-width: 768px) {
+            :root {
+                --section-padding-x: var(--space-xl);
+            }
+
+            /* Hero adjustments */
+            .hero__title span {
+                display: inline;
+                margin-left: 0.1em;
+            }
+
+            .md\:grid-cols-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .md\:grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .md\:flex-row {
+                flex-direction: row;
+            }
+
+            .md\:text-left {
+                text-align: left;
+            }
+        }
+
+        /* ----- LG: ≥992px (Small desktops) ----- */
+        @media (min-width: 992px) {
+            .lg\:grid-cols-3 {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .lg\:grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* ----- XL: ≥1200px (Large desktops) ----- */
+        @media (min-width: 1200px) {
+            .xl\:grid-cols-4 {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .xl\:grid-cols-5 {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
+
+        /* ----- XXL: ≥1400px (Extra large) ----- */
+        @media (min-width: 1400px) {
+            /* Add any XXL specific styles here */
+        }
+
+        /* ================================
+           12. ACCESSIBILITY
+           ================================ */
+        
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --clr-cream: #FFFFFF;
+                --clr-espresso: #000000;
+            }
+        }
+
+        /* Screen Reader Only */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .about {
+            background-color: var(--clr-ivory);
+            padding: var(--section-padding-y) 0;
+        }
+
+        .about__container {
+            width: min(var(--container-md), 100% - var(--space-lg) * 2);
+            margin-inline: auto;
+            display: grid;
+            gap: var(--space-xl);
+        }
+
+        /* ----- ABOUT IMAGE ----- */
+        .about__image-wrapper {
+            position: relative;
+        }
+
+        .about__image {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Decorative accent behind image */
+        .about__image-wrapper::before {
+            content: '';
+            position: absolute;
+            top: var(--space-md);
+            left: var(--space-md);
+            right: calc(var(--space-md) * -1);
+            bottom: calc(var(--space-md) * -1);
+            background-color: var(--clr-taupe);
+            border-radius: var(--radius-lg);
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        /* ----- ABOUT CONTENT ----- */
+        .about__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about__tagline {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2xs);
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            letter-spacing: var(--ls-widest);
+            text-transform: uppercase;
+            color: var(--clr-terracotta);
+            margin-bottom: var(--space-md);
+        }
+
+        .about__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-4xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-espresso);
+            margin-bottom: var(--space-md);
+        }
+
+        .about__title span {
+            font-style: italic;
+        }
+
+        .about__text {
+            font-family: var(--ff-body);
+            font-size: var(--fs-base);
+            line-height: var(--lh-relaxed);
+            color: var(--clr-espresso);
+            margin-bottom: var(--space-md);
+        }
+
+        .about__text:last-of-type {
+            margin-bottom: var(--space-md);
+        }
+
+        .about__signature {
+            font-family: var(--ff-display);
+            font-size: var(--fs-xl);
+            font-style: italic;
+            color: var(--clr-mocha);
+        }
+
+        /* ----- ABOUT RESPONSIVE ----- */
+        @media (min-width: 768px) {
+            .about__container {
+                grid-template-columns: 1fr 1fr;
+                gap: var(--space-2xl);
+                align-items: center;
+            }
+
+            .about__image-wrapper {
+                order: 2;
+            }
+
+            .about__content {
+                order: 1;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .about__container {
+                width: min(var(--container-lg), 100% - var(--space-xl) * 2);
+                gap: var(--space-3xl);
+            }
+
+            .about__title {
+                font-size: var(--fs-5xl);
+            }
+        }
+
+        /* ============================================
+           SERVICES SECTION
+           ============================================ */
+        .services {
+            background-color: var(--clr-espresso);
+            padding: var(--section-padding-y) 0;
+        }
+
+        .services__container {
+            width: min(var(--container-lg), 100% - var(--space-lg) * 2);
+            margin-inline: auto;
+        }
+
+        /* ----- SERVICES HEADER ----- */
+        .services__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .services__tagline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2xs);
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            letter-spacing: var(--ls-widest);
+            text-transform: uppercase;
+            color: var(--clr-terracotta);
+            margin-bottom: var(--space-xs);
+        }
+
+        .services__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-3xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-cream);
+        }
+
+        .services__title span {
+            font-style: italic;
+        }
+
+        /* ----- SERVICE CATEGORIES ----- */
+        .services__categories {
+            display: grid;
+            gap: var(--space-xl);
+        }
+
+        /* ----- SERVICE CATEGORY CARD ----- */
+        .service-category {
+            background-color: rgba(250, 247, 242, 0.05);
+            border: 1px solid rgba(250, 247, 242, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-md);
+            box-shadow: var(--shadow-md);
+            transition: 
+                transform var(--transition-base),
+                box-shadow var(--transition-base);
+        }
+
+        .service-category:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .service-category__header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-sm);
+            padding-bottom: var(--space-xs);
+            border-bottom: 1px solid rgba(250, 247, 242, 0.1);
+        }
+
+        .service-category__icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--clr-mocha);
+            border-radius: var(--radius-full);
+            color: var(--clr-cream);
+            font-size: var(--fs-base);
+        }
+
+        .service-category__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-lg);
+            font-weight: 400;
+            color: var(--clr-cream);
+        }
+
+        /* ----- SERVICE LIST ----- */
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* ----- SERVICE ITEM ----- */
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(250, 247, 242, 0.05);
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .service-item:first-child {
+            padding-top: 0;
+        }
+
+        .service-item__info {
+            flex: 1;
+            padding-right: 1rem;
+        }
+
+        .service-item__name {
+            font-family: var(--ff-body);
+            font-size: var(--fs-base);
+            font-weight: 600;
+            color: var(--clr-cream);
+            margin: 0 0 0.125rem 0;
+        }
+
+        .service-item__description {
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-style: italic;
+            color: var(--clr-taupe);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .service-item__price {
+            font-family: var(--ff-display);
+            font-size: var(--fs-lg);
+            font-weight: 400;
+            color: var(--clr-cream);
+            flex-shrink: 0;
+        }
+
+        /* ----- SERVICES CTA ----- */
+        .services__cta {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        /* ----- SERVICES RESPONSIVE ----- */
+        @media (min-width: 768px) {
+            .services__categories {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services__title {
+                font-size: var(--fs-4xl);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .services__container {
+                width: min(var(--container-lg), 100% - var(--space-xl) * 2);
+            }
+
+            .service-category {
+                padding: var(--space-lg);
+            }
+        }
+
+        /* ============================================
+           GALLERY SECTION
+           ============================================ */
+        .gallery {
+            background-color: var(--clr-ivory);
+            padding: var(--section-padding-y) 0;
+        }
+
+        .gallery__container {
+            width: min(var(--container-lg), 100% - var(--space-lg) * 2);
+            margin-inline: auto;
+        }
+
+        /* ----- GALLERY HEADER ----- */
+        .gallery__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .gallery__tagline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2xs);
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            letter-spacing: var(--ls-widest);
+            text-transform: uppercase;
+            color: var(--clr-terracotta);
+            margin-bottom: var(--space-xs);
+        }
+
+        .gallery__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-3xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-espresso);
+        }
+
+        .gallery__title span {
+            font-style: italic;
+        }
+
+        /* ----- GALLERY GRID ----- */
+        .gallery__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+        }
+
+        /* ----- GALLERY ITEM ----- */
+        .gallery__item {
+            position: relative;
+            overflow: hidden;
+            border-radius: var(--radius-md);
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: 
+                transform var(--transition-base),
+                box-shadow var(--transition-base);
+        }
+
+        .gallery__item:hover,
+        .gallery__item:focus-within {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .gallery__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform var(--transition-slow);
+        }
+
+        .gallery__item:hover .gallery__image,
+        .gallery__item:focus-within .gallery__image {
+            transform: scale(1.05);
+        }
+
+        /* Overlay */
+        .gallery__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(61, 44, 41, 0.8) 0%,
+                rgba(61, 44, 41, 0) 50%
+            );
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding: var(--space-md);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+
+        .gallery__item:hover .gallery__overlay,
+        .gallery__item:focus-within .gallery__overlay {
+            opacity: 1;
+        }
+
+        .gallery__caption {
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            color: var(--clr-cream);
+            text-align: center;
+        }
+
+        /* Featured item - spans 2 columns on larger screens */
+        .gallery__item--featured {
+            grid-column: span 2;
+            aspect-ratio: 2 / 1;
+        }
+
+        /* ----- GALLERY CTA ----- */
+        .gallery__cta {
+            text-align: center;
+            margin-top: var(--space-xl);
+        }
+
+        .gallery__cta-text {
+            font-family: var(--ff-body);
+            font-size: var(--fs-base);
+            color: var(--clr-espresso);
+            margin-bottom: var(--space-sm);
+        }
+
+        .gallery__cta-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2xs);
+            font-family: var(--ff-body);
+            font-size: var(--fs-base);
+            font-weight: 500;
+            color: var(--clr-mocha);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .gallery__cta-link:hover,
+        .gallery__cta-link:focus {
+            color: var(--clr-terracotta);
+        }
+
+        .gallery__cta-link i {
+            transition: transform var(--transition-fast);
+        }
+
+        .gallery__cta-link:hover i,
+        .gallery__cta-link:focus i {
+            transform: translateX(4px);
+        }
+
+        /* ----- GALLERY RESPONSIVE ----- */
+        @media (min-width: 576px) {
+            .gallery__grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-md);
+            }
+
+            .gallery__item--featured {
+                grid-column: span 2;
+                grid-row: span 2;
+                aspect-ratio: 1 / 1;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gallery__title {
+                font-size: var(--fs-4xl);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .gallery__container {
+                width: min(var(--container-lg), 100% - var(--space-xl) * 2);
+            }
+
+            .gallery__grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* ============================================
+           CONTACT SECTION
+           ============================================ */
+        .contact {
+            background-color: var(--clr-mocha);
+            padding: var(--section-padding-y) 0;
+        }
+
+        .contact__container {
+            width: min(var(--container-lg), 100% - var(--space-lg) * 2);
+            margin-inline: auto;
+        }
+
+        /* ----- CONTACT HEADER ----- */
+        .contact__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .contact__tagline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            font-weight: 500;
+            letter-spacing: var(--ls-widest);
+            text-transform: uppercase;
+            color: var(--clr-cream);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact__title {
+            font-family: var(--ff-display);
+            font-size: var(--fs-3xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-cream);
+        }
+
+        .contact__title span {
+            font-style: italic;
+        }
+
+        /* ----- CONTACT GRID ----- */
+        .contact__grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        /* ----- CONTACT CARDS ----- */
+        .contact-card {
+            background-color: rgba(250, 247, 242, 0.05);
+            border: 1px solid rgba(250, 247, 242, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .contact-card__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--clr-terracotta);
+            border-radius: 50%;
+            color: var(--clr-cream);
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-card__title {
+            font-family: var(--ff-display);
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--clr-cream);
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+        }
+
+        .contact-card__text {
+            font-family: var(--ff-body);
+            font-size: 0.9rem;
+            color: var(--clr-taupe);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .contact-card__link {
+            color: var(--clr-cream);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-card__link:hover,
+        .contact-card__link:focus {
+            color: var(--clr-terracotta);
+        }
+
+        /* Hours list */
+        .contact-card__hours {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .contact-card__hours li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            font-family: var(--ff-body);
+            font-size: 0.9rem;
+            color: var(--clr-taupe);
+            line-height: 1.4;
+        }
+
+        .contact-card__hours li:not(:last-child) {
+            border-bottom: 1px solid rgba(250, 247, 242, 0.1);
+        }
+
+        .contact-card__hours span:last-child {
+            color: var(--clr-cream);
+        }
+
+        /* ----- CONTACT CTA ----- */
+        .contact__cta {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .contact__cta-text {
+            font-family: var(--ff-body);
+            font-size: 1.125rem;
+            color: var(--clr-cream);
+            margin-bottom: 1rem;
+        }
+
+        /* ----- CONTACT RESPONSIVE ----- */
+        @media (min-width: 768px) {
+            .contact__grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .contact__title {
+                font-size: var(--fs-4xl);
+            }
+
+            .contact-card {
+                text-align: left;
+                padding: 1.75rem 2.25rem;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .contact__container {
+                width: min(var(--container-lg), 100% - var(--space-xl) * 2);
+            }
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer {
+            background-color: var(--clr-espresso);
+            padding: var(--space-xl) 0 var(--space-md);
+        }
+
+        .footer__container {
+            width: min(var(--container-lg), 100% - var(--space-lg) * 2);
+            margin-inline: auto;
+        }
+
+        /* ----- FOOTER MAIN ----- */
+        .footer__main {
+            display: grid;
+            gap: var(--space-xl);
+            padding-bottom: var(--space-xl);
+            border-bottom: 1px solid rgba(250, 247, 242, 0.1);
+        }
+
+        /* ----- FOOTER BRAND ----- */
+        .footer__brand {
+            text-align: center;
+        }
+
+        .footer__logo {
+            font-family: var(--ff-display);
+            font-size: var(--fs-2xl);
+            font-weight: 400;
+            line-height: var(--lh-tight);
+            color: var(--clr-cream);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer__logo span {
+            font-style: italic;
+        }
+
+        .footer__logo:hover,
+        .footer__logo:focus {
+            color: var(--clr-terracotta);
+        }
+
+        .footer__tagline {
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            color: var(--clr-taupe);
+            line-height: var(--lh-normal);
+        }
+
+        /* ----- FOOTER NAV ----- */
+        .footer__nav {
+            text-align: center;
+        }
+
+        .footer__nav-title {
+            font-family: var(--ff-body);
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            letter-spacing: var(--ls-widest);
+            text-transform: uppercase;
+            color: var(--clr-cream);
+            margin-bottom: var(--space-sm);
+        }
+
+        .footer__nav-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-xs) var(--space-md);
+        }
+
+        .footer__nav-link {
+            font-family: var(--ff-body);
+            font-size: var(--fs-sm);
+            color: var(--clr-taupe);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer__nav-link:hover,
+        .footer__nav-link:focus {
+            color: var(--clr-cream);
+        }
+
+        /* ----- FOOTER SOCIAL ----- */
+        .footer__social {
+            margin-top: var(--space-md);
+        }
+
+        .footer__social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+
+        .footer__social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            font-size: 1rem;
+            color: var(--clr-cream);
+            border: 1px solid rgba(250, 247, 242, 0.2);
+            border-radius: var(--radius-full);
+            transition: 
+                color var(--transition-fast),
+                background-color var(--transition-fast),
+                border-color var(--transition-fast);
+        }
+
+        .footer__social-link:hover,
+        .footer__social-link:focus {
+            color: var(--clr-espresso);
+            background-color: var(--clr-cream);
+            border-color: var(--clr-cream);
+        }
+
+        /* ----- FOOTER BOTTOM ----- */
+        .footer__bottom {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            padding-top: var(--space-md);
+            text-align: center;
+        }
+
+        .footer__copyright {
+            font-family: var(--ff-body);
+            font-size: var(--fs-xs);
+            color: var(--clr-taupe);
+        }
+
+        .footer__credit {
+            font-family: var(--ff-body);
+            font-size: var(--fs-xs);
+            color: var(--clr-taupe);
+        }
+
+        .footer__credit a {
+            color: var(--clr-cream);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer__credit a:hover,
+        .footer__credit a:focus {
+            color: var(--clr-terracotta);
+        }
+
+        /* ----- FOOTER RESPONSIVE ----- */
+        @media (min-width: 768px) {
+            .footer__main {
+                grid-template-columns: 2fr 1fr 1fr;
+                text-align: left;
+                gap: var(--space-2xl);
+            }
+
+            .footer__brand {
+                text-align: left;
+            }
+
+            .footer__social-links {
+                justify-content: flex-start;
+            }
+
+            .footer__nav {
+                text-align: left;
+            }
+
+            .footer__nav-list {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--space-xs);
+            }
+
+            .footer__bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .footer__container {
+                width: min(var(--container-lg), 100% - var(--space-xl) * 2);
+            }
+
+            .footer__main {
+                gap: var(--space-3xl);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- ================================
+         HEADER & NAVIGATION
+         ================================ -->
+    <header class="header" id="header">
+        <a href="#" class="logo">Glow <span>by Grace</span></a>
+        
+        <button 
+            class="nav-toggle" 
+            id="navToggle"
+            type="button"
+            aria-label="Toggle navigation menu" 
+            aria-expanded="false" 
+            aria-controls="primaryNav">
+            <i class="fa-solid fa-bars" aria-hidden="true"></i>
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            <span class="sr-only">Menu</span>
+        </button>
+        
+        <nav class="nav" id="primaryNav" aria-label="Primary navigation">
+            <ul class="nav__list" role="list">
+                <li class="nav__item">
+                    <a href="#about" class="nav__link">About</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#services" class="nav__link">Services</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#gallery" class="nav__link">Gallery</a>
+                </li>
+                <li class="nav__item">
+                    <a href="#contact" class="nav__link">Contact</a>
+                </li>
+                <li class="nav__item nav__cta">
+                    <a href="#booking" class="btn btn--primary">
+                        <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                        Book Now
+                    </a>
+                </li>
+            </ul>
+            
+            <!-- Mobile-only: Separator -->
+            <div class="nav__separator" aria-hidden="true"></div>
+            
+            <!-- Mobile-only: Social links footer -->
+            <div class="nav__footer">
+                <a href="https://instagram.com" class="nav__social-link" aria-label="Follow on Instagram" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://facebook.com" class="nav__social-link" aria-label="Follow on Facebook" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                </a>
+                <a href="https://tiktok.com" class="nav__social-link" aria-label="Follow on TikTok" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                </a>
+            </div>
+        </nav>
+        
+        <!-- Desktop-only: CTA Button -->
+        <a href="#booking" class="header__cta btn btn--primary">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            Book Now
+        </a>
+    </header>
+
+    <!-- ================================
+         HERO SECTION
+         ================================ -->
+    <section class="hero" id="hero">
+        <div class="hero__content">
+            <p class="hero__tagline">
+                <i class="fa-solid fa-sparkles" aria-hidden="true"></i>
+                Brow & Lash Artist
+            </p>
+            <h1 class="hero__title">Glow <span>by Grace</span></h1>
+            <p class="hero__subtitle">
+                Effortless beauty, expertly crafted. Enhancing your natural radiance 
+                one appointment at a time.
+            </p>
+            <a href="#booking" class="btn btn--primary hero__cta">
+                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                Book Your Glow
+            </a>
+        </div>
+        
+        <div class="hero__scroll" aria-hidden="true">
+            <span class="hero__scroll-text">Scroll</span>
+            <i class="fa-solid fa-chevron-down hero__scroll-icon"></i>
+        </div>
+    </section>
+
+    <!-- ================================
+         ABOUT SECTION
+         ================================ -->
+    <section class="about" id="about">
+        <div class="about__container">
+            <div class="about__image-wrapper">
+                <img 
+                    src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&h=750&fit=crop&crop=face" 
+                    alt="Grace, brow and lash artist, smiling warmly" 
+                    class="about__image"
+                    loading="lazy"
+                >
+            </div>
+            
+            <div class="about__content">
+                <p class="about__tagline">
+                    <i class="fa-solid fa-heart" aria-hidden="true"></i>
+                    My Story
+                </p>
+                <h2 class="about__title">Hi, I'm <span>Grace</span></h2>
+                <p class="about__text">
+                    Beauty has always been my passion. What started as doing my friends' 
+                    eyebrows in college turned into a calling I couldn't ignore. After 
+                    years of training and perfecting my craft, I opened Glow by Grace 
+                    to share that passion with you.
+                </p>
+                <p class="about__text">
+                    I believe that beauty should feel effortless. My approach is all about 
+                    enhancing what you already have—not covering it up. Whether you're here 
+                    for a subtle brow tint or a full lash transformation, you'll leave 
+                    feeling like the best version of yourself.
+                </p>
+                <p class="about__text">
+                    Every face tells a story, and I'm here to help yours shine.
+                </p>
+                <p class="about__signature">— Grace Monroe</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         SERVICES SECTION
+         ================================ -->
+    <section class="services" id="services">
+        <div class="services__container">
+            <header class="services__header">
+                <p class="services__tagline">
+                    <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+                    What I Offer
+                </p>
+                <h2 class="services__title">Services & <span>Pricing</span></h2>
+            </header>
+
+            <div class="services__categories">
+                <!-- Brow Services -->
+                <div class="service-category">
+                    <div class="service-category__header">
+                        <div class="service-category__icon">
+                            <i class="fa-solid fa-eye" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="service-category__title">Brow Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Brow Shaping</p>
+                                <p class="service-item__description">Wax & tweeze to your perfect arch</p>
+                            </div>
+                            <span class="service-item__price">$25</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Brow Tint</p>
+                                <p class="service-item__description">Semi-permanent color for fuller-looking brows</p>
+                            </div>
+                            <span class="service-item__price">$20</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Brow Lamination</p>
+                                <p class="service-item__description">Fluffy, lifted brows that last 6-8 weeks</p>
+                            </div>
+                            <span class="service-item__price">$65</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">The Full Brow</p>
+                                <p class="service-item__description">Lamination + tint + shape — the works</p>
+                            </div>
+                            <span class="service-item__price">$85</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Lash Services -->
+                <div class="service-category">
+                    <div class="service-category__header">
+                        <div class="service-category__icon">
+                            <i class="fa-solid fa-star" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="service-category__title">Lash Services</h3>
+                    </div>
+                    <ul class="service-list">
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Lash Lift</p>
+                                <p class="service-item__description">Natural curl that lasts 6-8 weeks</p>
+                            </div>
+                            <span class="service-item__price">$55</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Lash Tint</p>
+                                <p class="service-item__description">Darker, more defined lashes</p>
+                            </div>
+                            <span class="service-item__price">$25</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Lift & Tint Combo</p>
+                                <p class="service-item__description">The perfect no-mascara look</p>
+                            </div>
+                            <span class="service-item__price">$70</span>
+                        </li>
+                        <li class="service-item">
+                            <div class="service-item__info">
+                                <p class="service-item__name">Classic Lash Extensions</p>
+                                <p class="service-item__description">Natural, wispy full set</p>
+                            </div>
+                            <span class="service-item__price">$150</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="services__cta">
+                <a href="#booking" class="btn btn--primary">
+                    <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                    Book Your Service
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         GALLERY SECTION
+         ================================ -->
+    <section class="gallery" id="gallery">
+        <div class="gallery__container">
+            <header class="gallery__header">
+                <p class="gallery__tagline">
+                    <i class="fa-solid fa-images" aria-hidden="true"></i>
+                    My Work
+                </p>
+                <h2 class="gallery__title">The <span>Gallery</span></h2>
+            </header>
+
+            <div class="gallery__grid">
+                <!-- Featured Image -->
+                <div class="gallery__item gallery__item--featured">
+                    <img 
+                        src="https://images.pexels.com/photos/3724431/pexels-photo-3724431.jpeg?auto=compress&cs=tinysrgb&w=800" 
+                        alt="Beautiful lash and brow work" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Lash & Brow</span>
+                    </div>
+                </div>
+
+                <!-- Regular Images -->
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/713949/pexels-photo-713949.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Eye lash detail" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Lash Detail</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/14411611/pexels-photo-14411611.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Model eyes closeup" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Natural Beauty</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/6186363/pexels-photo-6186363.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Dark lash extensions" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Volume Lashes</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/33637609/pexels-photo-33637609.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Lash tech at work" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">The Process</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/7755523/pexels-photo-7755523.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Lash application" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Classic Set</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/713949/pexels-photo-713949.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Lash closeup" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Lash Lift</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/6186363/pexels-photo-6186363.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Dark lash look" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Dramatic Lashes</span>
+                    </div>
+                </div>
+
+                <div class="gallery__item">
+                    <img 
+                        src="https://images.pexels.com/photos/14411611/pexels-photo-14411611.jpeg?auto=compress&cs=tinysrgb&w=400" 
+                        alt="Eyes closeup" 
+                        class="gallery__image"
+                        loading="lazy"
+                    >
+                    <div class="gallery__overlay">
+                        <span class="gallery__caption">Brow & Lash</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery__cta">
+                <p class="gallery__cta-text">See more of my work on Instagram</p>
+                <a href="https://instagram.com" class="gallery__cta-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                    Follow @glowbygrace
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         CONTACT SECTION
+         ================================ -->
+    <section class="contact" id="contact">
+        <div class="contact__container">
+            <header class="contact__header">
+                <p class="contact__tagline">
+                    <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                    Get In Touch
+                </p>
+                <h2 class="contact__title">Let's <span>Connect</span></h2>
+            </header>
+
+            <div class="contact__grid">
+                <!-- Location Card -->
+                <div class="contact-card">
+                    <div class="contact-card__icon">
+                        <i class="fa-solid fa-map-pin" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="contact-card__title">Location</h3>
+                    <p class="contact-card__text">
+                        <a href="https://maps.google.com" class="contact-card__link" target="_blank" rel="noopener noreferrer">
+                            123 Beauty Lane, Suite 4<br>
+                            Nashville, TN 37201
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Hours Card -->
+                <div class="contact-card">
+                    <div class="contact-card__icon">
+                        <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="contact-card__title">Hours</h3>
+                    <ul class="contact-card__hours">
+                        <li>
+                            <span>Tue – Fri</span>
+                            <span>9am – 6pm</span>
+                        </li>
+                        <li>
+                            <span>Saturday</span>
+                            <span>10am – 4pm</span>
+                        </li>
+                        <li>
+                            <span>Sun – Mon</span>
+                            <span>Closed</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="contact-card">
+                    <div class="contact-card__icon">
+                        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+                    </div>
+                    <h3 class="contact-card__title">Contact</h3>
+                    <p class="contact-card__text">
+                        <a href="tel:+16155551234" class="contact-card__link">(615) 555-1234</a><br>
+                        <a href="mailto:hello@glowbygrace.com" class="contact-card__link">hello@glowbygrace.com</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="contact__cta">
+                <p class="contact__cta-text">Ready to book your appointment?</p>
+                <a href="#booking" class="btn btn--primary">
+                    <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                    Book Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================================
+         FOOTER
+         ================================ -->
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__main">
+                <!-- Brand + Social -->
+                <div class="footer__brand">
+                    <a href="#" class="footer__logo">Glow <span>by Grace</span></a>
+                    <p class="footer__tagline">
+                        Effortless beauty, expertly crafted. Enhancing your natural radiance one appointment at a time.
+                    </p>
+                    <div class="footer__social">
+                        <div class="footer__social-links">
+                            <a href="https://instagram.com" class="footer__social-link" aria-label="Follow on Instagram" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://facebook.com" class="footer__social-link" aria-label="Follow on Facebook" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://tiktok.com" class="footer__social-link" aria-label="Follow on TikTok" target="_blank" rel="noopener noreferrer">
+                                <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <p class="footer__nav-title">Quick Links</p>
+                    <ul class="footer__nav-list">
+                        <li><a href="#about" class="footer__nav-link">About</a></li>
+                        <li><a href="#services" class="footer__nav-link">Services</a></li>
+                        <li><a href="#gallery" class="footer__nav-link">Gallery</a></li>
+                        <li><a href="#contact" class="footer__nav-link">Contact</a></li>
+                        <li><a href="#booking" class="footer__nav-link">Book Now</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Resources -->
+                <nav class="footer__nav" aria-label="Resources navigation">
+                    <p class="footer__nav-title">Resources</p>
+                    <ul class="footer__nav-list">
+                        <li><a href="#faq" class="footer__nav-link">FAQs</a></li>
+                        <li><a href="#policies" class="footer__nav-link">Policies</a></li>
+                        <li><a href="#terms" class="footer__nav-link">Terms of Service</a></li>
+                        <li><a href="#privacy" class="footer__nav-link">Privacy Policy</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    &copy; 2025 Glow by Grace. All rights reserved.
+                </p>
+                <p class="footer__credit">
+                    Website by <a href="https://hcweblabs.com" target="_blank" rel="noopener noreferrer">HC Web Labs</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================================
+         SCROLL TO TOP BUTTON
+         ================================ -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fa-solid fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ================================
+         JAVASCRIPT
+         ================================ -->
+    <script>
+        // Scroll to Top Button Functionality
+        (function() {
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            const scrollThreshold = 300; // Show button after scrolling 300px
+            
+            // Check scroll position and toggle button visibility
+            function toggleScrollButton() {
+                if (window.scrollY > scrollThreshold) {
+                    scrollToTopBtn.classList.add('is-visible');
+                } else {
+                    scrollToTopBtn.classList.remove('is-visible');
+                }
+            }
+            
+            // Smooth scroll to top
+            function scrollToTop() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // Event listeners
+            window.addEventListener('scroll', toggleScrollButton, { passive: true });
+            scrollToTopBtn.addEventListener('click', scrollToTop);
+            
+            // Check on load (in case page is already scrolled)
+            toggleScrollButton();
+        })();
+    </script>
+
+    <!-- ================================
+         SCROLL TO TOP BUTTON
+         ================================ -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="Scroll to top">
+        <i class="fa-solid fa-chevron-up" aria-hidden="true"></i>
+    </button>
+
+    <!-- ================================
+         JAVASCRIPT
+         ================================ -->
+    <script>
+        /**
+         * Glow by Grace - Main JavaScript
+         * Mobile-first navigation, scroll effects, and interactions
+         */
+        (function() {
+            'use strict';
+
+            // ============================================
+            // DOM ELEMENTS
+            // ============================================
+            const header = document.getElementById('header');
+            const nav = document.getElementById('primaryNav');
+            const navToggle = document.getElementById('navToggle');
+            const navLinks = document.querySelectorAll('.nav__link');
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+
+            // ============================================
+            // CONFIGURATION
+            // ============================================
+            const CONFIG = {
+                headerScrollThreshold: 50,
+                scrollToTopThreshold: 300,
+                mobileBreakpoint: 768,
+                transitionDuration: 300
+            };
+
+            // ============================================
+            // NAVIGATION
+            // ============================================
+            const Navigation = {
+                isOpen: false,
+                lastFocusedElement: null,
+
+                init() {
+                    if (!navToggle || !nav) return;
+
+                    // Toggle button click
+                    navToggle.addEventListener('click', () => this.toggle());
+
+                    // Close when clicking nav links
+                    navLinks.forEach(link => {
+                        link.addEventListener('click', () => {
+                            if (this.isOpen) this.close();
+                        });
+                    });
+
+                    // Close when clicking backdrop (nav element itself, not children)
+                    nav.addEventListener('click', (e) => {
+                        if (e.target === nav && this.isOpen) {
+                            this.close();
+                        }
+                    });
+
+                    // Keyboard events
+                    document.addEventListener('keydown', (e) => this.handleKeydown(e));
+
+                    // Close on resize to desktop
+                    window.addEventListener('resize', () => {
+                        if (window.innerWidth >= CONFIG.mobileBreakpoint && this.isOpen) {
+                            this.close();
+                        }
+                    }, { passive: true });
+                },
+
+                open() {
+                    this.lastFocusedElement = document.activeElement;
+                    this.isOpen = true;
+
+                    navToggle.setAttribute('aria-expanded', 'true');
+                    nav.classList.add('is-open');
+                    document.body.classList.add('nav-open');
+
+                    // Focus first nav link after animation
+                    setTimeout(() => {
+                        const firstLink = nav.querySelector('.nav__link');
+                        if (firstLink) firstLink.focus();
+                    }, CONFIG.transitionDuration);
+                },
+
+                close() {
+                    this.isOpen = false;
+
+                    navToggle.setAttribute('aria-expanded', 'false');
+                    nav.classList.remove('is-open');
+                    document.body.classList.remove('nav-open');
+
+                    // Return focus to toggle
+                    setTimeout(() => {
+                        if (this.lastFocusedElement && this.lastFocusedElement !== document.body) {
+                            this.lastFocusedElement.focus();
+                        } else {
+                            navToggle.focus();
+                        }
+                    }, 50);
+                },
+
+                toggle() {
+                    if (this.isOpen) {
+                        this.close();
+                    } else {
+                        this.open();
+                    }
+                },
+
+                handleKeydown(e) {
+                    // Only handle when nav is open
+                    if (!this.isOpen) return;
+
+                    // Close on Escape
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        this.close();
+                        return;
+                    }
+
+                    // Focus trap
+                    if (e.key === 'Tab') {
+                        this.trapFocus(e);
+                    }
+                },
+
+                trapFocus(e) {
+                    const focusableSelectors = [
+                        'a[href]',
+                        'button:not([disabled])',
+                        '[tabindex]:not([tabindex="-1"])'
+                    ].join(', ');
+
+                    const focusableElements = nav.querySelectorAll(focusableSelectors);
+                    if (focusableElements.length === 0) return;
+
+                    const firstEl = focusableElements[0];
+                    const lastEl = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey) {
+                        // Shift + Tab: if on first element, go to last
+                        if (document.activeElement === firstEl) {
+                            e.preventDefault();
+                            lastEl.focus();
+                        }
+                    } else {
+                        // Tab: if on last element, go to first
+                        if (document.activeElement === lastEl) {
+                            e.preventDefault();
+                            firstEl.focus();
+                        }
+                    }
+                }
+            };
+
+            // ============================================
+            // HEADER SCROLL EFFECT
+            // ============================================
+            const HeaderScroll = {
+                init() {
+                    if (!header) return;
+
+                    window.addEventListener('scroll', () => this.update(), { passive: true });
+                    this.update(); // Initial check
+                },
+
+                update() {
+                    if (window.scrollY > CONFIG.headerScrollThreshold) {
+                        header.classList.add('is-scrolled');
+                    } else {
+                        header.classList.remove('is-scrolled');
+                    }
+                }
+            };
+
+            // ============================================
+            // SCROLL TO TOP BUTTON
+            // ============================================
+            const ScrollToTop = {
+                init() {
+                    if (!scrollToTopBtn) return;
+
+                    window.addEventListener('scroll', () => this.toggleVisibility(), { passive: true });
+                    scrollToTopBtn.addEventListener('click', () => this.scrollToTop());
+                    this.toggleVisibility(); // Initial check
+                },
+
+                toggleVisibility() {
+                    if (window.scrollY > CONFIG.scrollToTopThreshold) {
+                        scrollToTopBtn.classList.add('is-visible');
+                    } else {
+                        scrollToTopBtn.classList.remove('is-visible');
+                    }
+                },
+
+                scrollToTop() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+
+            // ============================================
+            // SMOOTH SCROLL FOR ANCHOR LINKS
+            // ============================================
+            const SmoothScroll = {
+                init() {
+                    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                        anchor.addEventListener('click', (e) => this.handleClick(e, anchor));
+                    });
+                },
+
+                handleClick(e, anchor) {
+                    const targetId = anchor.getAttribute('href');
+
+                    // Skip empty anchors
+                    if (targetId === '#' || targetId === '') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (!targetElement) return;
+
+                    e.preventDefault();
+
+                    // Calculate offset accounting for fixed header
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const targetPosition = targetElement.getBoundingClientRect().top 
+                                         + window.scrollY 
+                                         - headerHeight 
+                                         - 20; // Extra padding
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            };
+
+            // ============================================
+            // ACTIVE NAV LINK HIGHLIGHTING
+            // ============================================
+            const NavHighlight = {
+                sections: null,
+
+                init() {
+                    this.sections = document.querySelectorAll('section[id]');
+                    if (this.sections.length === 0) return;
+
+                    window.addEventListener('scroll', () => this.update(), { passive: true });
+                },
+
+                update() {
+                    const headerHeight = header ? header.offsetHeight : 0;
+                    const scrollPosition = window.scrollY + headerHeight + 100;
+
+                    this.sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        const sectionHeight = section.offsetHeight;
+                        const sectionId = section.getAttribute('id');
+
+                        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                            navLinks.forEach(link => {
+                                link.classList.remove('is-active');
+                                if (link.getAttribute('href') === `#${sectionId}`) {
+                                    link.classList.add('is-active');
+                                }
+                            });
+                        }
+                    });
+                }
+            };
+
+            // ============================================
+            // INITIALIZE ALL MODULES
+            // ============================================
+            document.addEventListener('DOMContentLoaded', () => {
+                Navigation.init();
+                HeaderScroll.init();
+                ScrollToTop.init();
+                SmoothScroll.init();
+                NavHighlight.init();
+            });
+
+        })();
+    </script>
+</body>
+</html>
